@@ -2,7 +2,7 @@
 Можете свободно копировать скрипт себе на сайт и использовать в любых целях. 
 
 Choosing a seat on a Mercedes Sprinter bus.
-You can freely copy the script to your website and use it for any purpose.
+You can freely copy the script to your website and use it for any purpose. MIT license.
 
 online demo: https://agran.github.io/choosing-a-seat-on-the-bus/avtobusJZ.html
 
