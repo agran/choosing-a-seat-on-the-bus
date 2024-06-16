@@ -1,20 +1,25 @@
 img {
 	height: auto;
 	width: 100%;
-	margin: 0.5em;
+	margin: 0.0em;
 	margin-top: 0.0em;
 	max-width: 40em;
 	user-select: none;
 }
+
 #imgParent > svg{
 	height: auto;
 	width: 100%;
-	margin: 0.5em;
+	margin: 0.0em;
 	margin-top: 0.0em;
 	max-width: 40em;
     position: absolute;
     left: 0.5em;
 	visibility: hidden;
+}
+
+#mestaTable{
+	margin-top: 0.5em;
 }
 
 #imgParent {
@@ -34,6 +39,11 @@ img {
     width: 7em;
 	vertical-align: top;
 }
+.save{
+    width: 7em;
+	vertical-align: top;
+}
+
 .mesto-n {
 	display: inline-block;
 	width: 1.5em;
