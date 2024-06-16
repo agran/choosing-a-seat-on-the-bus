@@ -85,12 +85,6 @@ $( document ).ready(function() {
 		update();
 	});
 	
-	$( document ).on('click', 'img', function(e) {
-		//console.dir(e);
-		//$svg.trigger('click', e);
-		//console.dir($('svg')[0].contentDocument.elementFromPoint(50, 50));
-	});
-	
 	$( document ).on('dblclick', 'path', function() {
 		console.dir($(this).attr('id'));
 		var mestoN = Number($(this).attr('id').match(/\d+/)[0]);
@@ -112,8 +106,18 @@ $( document ).ready(function() {
 			  new ClipboardItem({ "image/png": blob })
 		  ]);
 		}, "image/png");
-
-
+	});
+	
+	$( document ).on('click', '.save', function(e) {
+		var data  = $('img').attr('src');
+		console.dir(data);
+		
+		var a = document.createElement('a');
+		a.href = data;
+		a.download = "Свободные места.png";
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
 	});
 	
 	$( document ).on('change', '#mestaSvobodnInput', function() {
