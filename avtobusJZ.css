@@ -1,0 +1,63 @@
+img {
+	height: auto;
+	width: 100%;
+	margin: 0.5em;
+	margin-top: 0.0em;
+	max-width: 40em;
+	user-select: none;
+}
+#imgParent > svg{
+	height: auto;
+	width: 100%;
+	margin: 0.5em;
+	margin-top: 0.0em;
+	max-width: 40em;
+    position: absolute;
+    left: 0.5em;
+	visibility: hidden;
+}
+
+#imgParent {
+	user-select: none;
+}
+
+.bOsv {
+	color: green;
+	width: 7em;
+}
+
+.bZan {
+	color: red;
+	width: 7em;
+}
+.copy{
+    width: 7em;
+	vertical-align: top;
+}
+.mesto-n {
+	display: inline-block;
+	width: 1.5em;
+	font-weight:700;
+}
+
+.mesto-status{
+	display: inline-block;
+	width: 5em;
+	font-weight:700;
+}
+
+.mesto-status-svob{
+	color: green;
+}
+.mesto-status-zan{
+	color: red;
+}
+
+.line-mesto {
+	margin-top: 0.15em;
+	margin-bottom: 0.15em;
+	
+}
+.clickedSVG{
+	pointer-events: fill; 
+}
