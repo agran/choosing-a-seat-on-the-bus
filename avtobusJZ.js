@@ -115,6 +115,23 @@ $( document ).ready(function() {
 		  ]);
 		}, "image/png");
 	});
+	$( document ).on('click', '.copyClose', function(e) {
+			
+		const canvas = document.createElement("canvas");
+		var img = $('img')[0];
+		
+		canvas.width = 1550;
+		canvas.height = 532;
+		canvas.getContext("2d").drawImage(img, 0, 0, 1550, 532);
+
+		canvas.toBlob((blob) => {
+		  navigator.clipboard.write([
+			  new ClipboardItem({ "image/png": blob })
+		  ]);
+		  
+		  setTimeout(function(){open(location, '_self').close();}, 50);
+		}, "image/png");
+	});
 	
 	$( document ).on('click', '.save', function(e) {
 		var data  = $('img').attr('src');

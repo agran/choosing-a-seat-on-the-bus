@@ -43,6 +43,11 @@ img {
     width: 7em;
 	vertical-align: top;
 }
+.copyClose{
+    width: 7em;
+	vertical-align: top;
+	color: red;
+}
 
 .mesto-n {
 	display: inline-block;
