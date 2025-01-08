@@ -129,7 +129,7 @@ $( document ).ready(function() {
 	});
 	
 	$( document ).on('change', '#mestaZanyatyInput', function() {
-		var arrMestaZan = $(this).val().split(",");
+		var arrMestaZan = $(this).val().replace(/[^\d., ]/g, '').split(/[\s,]+/);
 		var arrMestaSvob = allMestaTxt.split(",");
 		
 		arrMestaZan.forEach(function(mestoN){
@@ -157,7 +157,7 @@ $( document ).ready(function() {
 			lineMesto.find('button').removeClass('bZan').addClass('bOsv').html('Освободить');			
 		});
 		
-		var arrMesta = $(this).val().split(",");
+		var arrMesta = $(this).val().replace(/[^\d., ]/g, '').split(/[\s,]+/);
 		var arrMestaZan = allMestaTxt.split(",");
 		
 		arrMesta.forEach(function(mestoN){
