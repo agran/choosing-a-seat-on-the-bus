@@ -71,3 +71,32 @@ img {
 .clickedSVG{
 	pointer-events: fill; 
 }
+
+#mestaSvobodnInput {
+	margin-bottom: 0.333em;	
+	background-color: #79ff79;
+}
+
+#mestaZanyatyInput {
+	margin-bottom: 0.333em;	
+	background-color: #ffa5a5;
+}
+
+.mestLabel{
+	width: 10em;
+	display: inline-block;
+	text-align: right;
+}
+
+.mestButton {
+	margin-left: 0.25em;
+	margin-top: 0.333em;	
+}
+
+.pastMesta, .copyMesta {
+	margin-left: 0.25em;
+}
+
+.parentInput {
+	
+}

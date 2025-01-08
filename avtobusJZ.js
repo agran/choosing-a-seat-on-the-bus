@@ -1,9 +1,11 @@
 var $svg;
-	
+var allMestaTxt = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20';
+
 $( document ).ready(function() {
     console.log( "ready!" );
 	
 	$('#mestaSvobodnInput').val('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19');
+	$('#mestaZanyatyInput').val('20');
 	
 	var svgtxt = getFile('avtobusJZ3.svg');
 	var doc = (new DOMParser).parseFromString(svgtxt, 'image/svg+xml');
@@ -29,6 +31,7 @@ $( document ).ready(function() {
 	function update(){
 		var i = 0;
 		var mestaTxt = '';
+		var mestaZanTxt = '';
 		$('.mesto-status').each(function(){
 			i ++;
 			if($(this).hasClass('mesto-status-svob')){
@@ -39,6 +42,7 @@ $( document ).ready(function() {
 				$svg.find(".Место-"+i).css('fill', '#f4f7e0');				
 				
 			}else{
+				mestaZanTxt += i+',';
 				$svg.find("#_Сидушка-"+i).attr('xlink:href', '#_СидушкаКрас');
 				$svg.find("#_Спинка-"+i).attr('xlink:href', '#_СпинкаКрас');
 				$svg.find(".Место-"+i).css('fill', '#7A7C6C');
@@ -48,8 +52,12 @@ $( document ).ready(function() {
 		if (mestaTxt.length > 0 && mestaTxt[mestaTxt.length-1] === ","){
 			mestaTxt = mestaTxt.slice(0,-1);
 		}
+		if (mestaZanTxt.length > 0 && mestaZanTxt[mestaZanTxt.length-1] === ","){
+			mestaZanTxt = mestaZanTxt.slice(0,-1);
+		}
 
 		$('#mestaSvobodnInput').val(mestaTxt);	
+		$('#mestaZanyatyInput').val(mestaZanTxt);
 		
 		//const XML = new XMLSerializer().serializeToString($svg[0]);
 		//const SVG64 = utf8_to_b64(XML);
@@ -120,19 +128,45 @@ $( document ).ready(function() {
 		document.body.removeChild(a);
 	});
 	
+	$( document ).on('change', '#mestaZanyatyInput', function() {
+		var arrMestaZan = $(this).val().split(",");
+		var arrMestaSvob = allMestaTxt.split(",");
+		
+		arrMestaZan.forEach(function(mestoN){
+			mestoN = mestoN.trim();
+			
+			var index = arrMestaSvob.indexOf(mestoN);
+			if (index !== -1) {
+				arrMestaSvob.splice(index, 1);
+			}
+			
+		});
+		
+		$('#mestaSvobodnInput').val(arrMestaSvob.join(','));
+		
+		$('#mestaSvobodnInput').trigger('change');
+		
+	});
+	
 	$( document ).on('change', '#mestaSvobodnInput', function() {
 		
 		$('.line-mesto').each(function(){
 			var lineMesto = $(this);
-
 			
 			lineMesto.find('.mesto-status').removeClass('mesto-status-svob').addClass('mesto-status-zan').html('Занято');
 			lineMesto.find('button').removeClass('bZan').addClass('bOsv').html('Освободить');			
 		});
 		
 		var arrMesta = $(this).val().split(",");
+		var arrMestaZan = allMestaTxt.split(",");
+		
 		arrMesta.forEach(function(mestoN){
 			mestoN = mestoN.trim();
+			
+			var index = arrMestaZan.indexOf(mestoN);
+			if (index !== -1) {
+				arrMestaZan.splice(index, 1);
+			}
 			
 			var lineMesto = $('.line-mesto[data-mesto="'+mestoN+'"]');
 
@@ -142,9 +176,24 @@ $( document ).ready(function() {
 			console.log(mestoN);
 		});
 		
+		$('#mestaZanyatyInput').val(arrMestaZan.join(','));
+		
 		update();
 	});
 	
+	$( document ).on('click', '.copyMesta', function() {
+		$(this).parent().find('input').select();
+		document.execCommand("copy");
+	});
+	
+	$( document ).on('click', '.pastMesta', function() {
+		var inputMesta = $(this).parent().find('input');
+		//$(this).parent().find('input').select();
+		navigator.clipboard.readText()
+			.then(text => {
+			inputMesta.val(text).trigger('change');
+		});
+	});
 });
 
 function utf8_to_b64(str) {
