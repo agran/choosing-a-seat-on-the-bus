@@ -191,7 +191,8 @@ $( document ).ready(function() {
 		//$(this).parent().find('input').select();
 		navigator.clipboard.readText()
 			.then(text => {
-			inputMesta.val(text).trigger('change');
+			inputMesta.val(text);
+			//.trigger('change');
 		});
 	});
 });
