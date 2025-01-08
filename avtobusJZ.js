@@ -4,8 +4,7 @@ var allMestaTxt = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20';
 $( document ).ready(function() {
     console.log( "ready!" );
 	
-	$('#mestaSvobodnInput').val('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19');
-	$('#mestaZanyatyInput').val('20');
+
 	
 	var svgtxt = getFile('avtobusJZ3.svg');
 	var doc = (new DOMParser).parseFromString(svgtxt, 'image/svg+xml');
@@ -25,8 +24,6 @@ $( document ).ready(function() {
 	}
 	mestaTableHtml += "<div class=line-mesto data-mesto="+20+"><span class='mesto-n'>"+20+".</span> <span class='mesto-status mesto-status-zan'>Занято</span> <button class=bOsv>Освободить</button></div>";	
 	$('#mestaTable').html(mestaTableHtml);
-	
-	update();
 	
 	function update(){
 		var i = 0;
@@ -56,7 +53,8 @@ $( document ).ready(function() {
 			mestaZanTxt = mestaZanTxt.slice(0,-1);
 		}
 
-		$('#mestaSvobodnInput').val(mestaTxt);	
+		$('#mestaSvobodnInput').val(mestaTxt);
+		window.location.hash = mestaTxt;		
 		$('#mestaZanyatyInput').val(mestaZanTxt);
 		
 		//const XML = new XMLSerializer().serializeToString($svg[0]);
@@ -224,6 +222,20 @@ $( document ).ready(function() {
 		$('.mestButton').css('color', '');
 		$('input.pasted').removeClass('pasted').trigger('change');
 	});
+
+	$( window ).on( 'hashchange', function( e ) {
+		$('#mestaSvobodnInput').val(window.location.hash.substring(1));
+		$('#mestaSvobodnInput').trigger('change');
+	});
+	
+	if(window.location.hash != ''){
+		$( window ).trigger("hashchange");
+	}else{
+		$('#mestaSvobodnInput').val('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19');
+		$('#mestaZanyatyInput').val('20');
+		update();
+	}
+	
 });
 
 function utf8_to_b64(str) {
