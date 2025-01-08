@@ -192,8 +192,20 @@ $( document ).ready(function() {
 		navigator.clipboard.readText()
 			.then(text => {
 			inputMesta.val(text);
-			//.trigger('change');
+			
+			$('input.pasted').removeClass('pasted');
+			if(RegExp(/[^\d,\s]/g).test(text)){
+				inputMesta.addClass('pasted');
+				$('.mestButton').css('color', 'red');
+			}else{
+				inputMesta.trigger('change');
+			}
 		});
+	});
+	
+	$( document ).on('click', '.mestButton', function() {
+		$('.mestButton').css('color', '');
+		$('input.pasted').removeClass('pasted').trigger('change');
 	});
 });
 

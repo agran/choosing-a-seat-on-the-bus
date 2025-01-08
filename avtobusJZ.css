@@ -100,3 +100,8 @@ img {
 .parentInput {
 	
 }
+
+.pasted {
+	border-color: red;
+	border-width: 0.25em;
+}
