@@ -1,6 +1,6 @@
 var $svg;
 var allMestaTxt = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20';
-
+var lastHasheChageTime = 0;
 $( document ).ready(function() {
     console.log( "ready!" );
 	
@@ -54,7 +54,14 @@ $( document ).ready(function() {
 		}
 
 		$('#mestaSvobodnInput').val(mestaTxt);
-		window.location.hash = mestaTxt;		
+		if(mestaTxt !== '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19'){
+			lastHasheChageTime = Date.now();
+			window.location.hash = mestaTxt;		
+		}else if(window.location.hash!==''){
+			lastHasheChageTime = Date.now();
+			window.location.hash = '';
+			history.replaceState(null, null, ' ');
+		}
 		$('#mestaZanyatyInput').val(mestaZanTxt);
 		
 		//const XML = new XMLSerializer().serializeToString($svg[0]);
@@ -222,10 +229,22 @@ $( document ).ready(function() {
 		$('.mestButton').css('color', '');
 		$('input.pasted').removeClass('pasted').trigger('change');
 	});
+	
+	$( document ).on('click', '.clearButton', function() {
+		$('#mestaSvobodnInput').val('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19');
+		$('#mestaZanyatyInput').val('20');
+		$('#mestaSvobodnInput').trigger('change');
+	});
 
 	$( window ).on( 'hashchange', function( e ) {
-		$('#mestaSvobodnInput').val(window.location.hash.substring(1));
-		$('#mestaSvobodnInput').trigger('change');
+		console.log('hashchange');
+		console.log(Date.now());
+		console.log(lastHasheChageTime);
+		console.log(Date.now() - lastHasheChageTime);
+		if((lastHasheChageTime == 0) || (Date.now() - lastHasheChageTime > 500)){
+			$('#mestaSvobodnInput').val(window.location.hash.substring(1));
+			$('#mestaSvobodnInput').trigger('change');
+		}
 	});
 	
 	if(window.location.hash != ''){
