@@ -112,8 +112,8 @@ $( document ).ready(function() {
 		var img = $('img')[0];
 		
 		canvas.width = 1550;
-		canvas.height = 654;
-		canvas.getContext("2d").drawImage(img, 0, 0, 1550, 654);
+		canvas.height = 642;
+		canvas.getContext("2d").drawImage(img, 0, 0, 1550, 642);
 		canvas.toBlob((blob) => {
 		  navigator.clipboard.write([
 			  new ClipboardItem({ "image/png": blob })
@@ -126,8 +126,8 @@ $( document ).ready(function() {
 		var img = $('img')[0];
 		
 		canvas.width = 1550;
-		canvas.height = 654;
-		canvas.getContext("2d").drawImage(img, 0, 0, 1550, 654);
+		canvas.height = 642;
+		canvas.getContext("2d").drawImage(img, 0, 0, 1550, 642);
 
 		canvas.toBlob((blob) => {
 		  navigator.clipboard.write([
